@@ -15,7 +15,6 @@ import localFont from 'next/font/local'
 const gilroyRegular = localFont({
   src: '../fonts/gilroy/Gilroy-Regular.ttf',
   variable: '--font-gilroy',
-  subsets: ['latin'],
   display: 'swap',
 })
 
