@@ -6,6 +6,12 @@ import path from 'path'
 // Remark packages
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+import rehypeFormat from 'rehype-format'
+import rehypeStringify from 'rehype-stringify'
+import remarkDirective from 'remark-directive'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import codesandbox from 'remark-codesandbox'
 import {
   remarkExtractFrontmatter,
   remarkCodeTitles,
@@ -21,6 +27,9 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+
+import { h } from 'hastscript'
+import { visit } from 'unist-util-visit'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -72,6 +81,45 @@ function createSearchIndex(allBlogs) {
       JSON.stringify(allCoreContent(sortPosts(allBlogs)))
     )
     console.log('Local search index generated...')
+  }
+}
+
+// This plugin is an example to turn `::note` into divs, passing arbitrary
+// attributes.
+function myRemarkPlugin() {
+  /**
+   * @param {import('mdast').Root} tree
+   *   Tree.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  return (tree) => {
+    visit(tree, (node) => {
+      if (
+        node.type === 'containerDirective' ||
+        node.type === 'leafDirective' ||
+        node.type === 'textDirective'
+      ) {
+        if (
+          node.name === 'note' ||
+          node.name === 'info' ||
+          node.name === 'danger' ||
+          node.name === 'caution' ||
+          node.name === 'tip'
+        ) {
+          const data = node.data || (node.data = {})
+          const tagName = node.type === 'textDirective' ? 'span' : 'div'
+
+          const properties = h(tagName, node.attributes || {}).properties
+          if (properties) {
+            properties.className = node.name
+          }
+
+          data.hName = tagName
+          data.hProperties = properties
+        }
+      }
+    })
   }
 }
 
@@ -140,11 +188,18 @@ export default makeSource({
       remarkCodeTitles,
       remarkMath,
       remarkImgToJsx,
+      remarkParse,
+      remarkDirective,
+      myRemarkPlugin,
+      remarkRehype,
+      [codesandbox, { mode: 'button' }],
     ],
     rehypePlugins: [
       rehypeSlug,
       rehypeAutolinkHeadings,
       rehypeKatex,
+      rehypeFormat,
+      rehypeStringify,
       [rehypeCitation, { path: path.join(root, 'data') }],
       [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
       rehypePresetMinify,

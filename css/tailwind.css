@@ -37,3 +37,56 @@ input:-webkit-autofill:focus {
 .gsc-comments .gsc-header em {
   display: none;
 }
+
+.tip p,
+.note p,
+.danger p,
+.info p,
+.caution p {
+  margin: 0;
+}
+
+.tip {
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #1c2024;
+  border-left: 3px solid #3db9cf;
+  background-color: #caf1f6;
+}
+
+.note {
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #1c2024;
+  border-left: 3px solid #b9bbc6;
+  background-color: #e8e8ec;
+}
+
+.danger {
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #1c2024;
+  border-left: 3px solid #eb8e90;
+  background-color: #ffdbdc;
+}
+
+.info {
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #1c2024;
+  border-left: 3px solid #65ba74;
+  background-color: #daf1db;
+}
+
+.caution {
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #1c2024;
+  border-left: 3px solid #e2a336;
+  background-color: #ffee9c;
+}
