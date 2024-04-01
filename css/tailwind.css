@@ -93,4 +93,5 @@ input:-webkit-autofill:focus {
 
 iframe {
   margin: 0 auto;
+  max-width: 100%;
 }
