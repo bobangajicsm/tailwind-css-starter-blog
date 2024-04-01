@@ -36,6 +36,7 @@ export default function Home({ posts }) {
                             height="0"
                             width={285}
                             className="mb-4 rounded-md"
+                            priority
                           />
                         ) : (
                           <NextImage
