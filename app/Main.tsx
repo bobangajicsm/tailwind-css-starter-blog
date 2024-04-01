@@ -16,7 +16,7 @@ export default function Home({ posts }) {
             Sloba's Blog
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
+            {siteMetadata.subtitle}
           </p>
         </div>
         <ul className="mx-auto max-w-3xl divide-y divide-gray-200 dark:divide-gray-700">

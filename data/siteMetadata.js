@@ -4,6 +4,7 @@ const siteMetadata = {
   author: 'Slobodan Gajic',
   headerTitle: 'CodewithSlobaBlog',
   description: 'React • Nextjs • Angular • JavaScript • Frontend web development blog',
+  subtitle: 'Checkout my recently published articles',
   language: 'en-us',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://blog.codewithsloba.com/',
