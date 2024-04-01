@@ -1,0 +1,81 @@
+---
+title: 'Next.js: Client vs. Server Components'
+date: '2024-04-01'
+lastmod: '2024-04-01'
+tags: ['next.js']
+draft: false
+summary: "Let's find out what are the key differences between Next.js client and server components, and learn how to use them for optimal web application performance."
+images: []  
+authors: ['default']
+layout: PostLayout
+canonicalUrl: https://yourblog.com/blog/nextjs-client-vs-server-components
+---
+
+Next.js has become my favorite framework because of its ability to create full-stack applications. One of the things that is different to other frameworks that I used previously (React, Angular) is that by default all components in Next.js are server components. This means that by default you can't access the browser API in these components. 
+
+So when you just start coding with Nextjs you get a little bit confused with what you can do and what you can't do. So let's clarify that.
+#### What Are Client Components?
+
+
+
+Client components are React components that run in the browser. They are capable of utilizing browser-specific functionalities such as window or document objects, and they're where you'd typically manage interactive states and handle user events. The essence of client components is that they bring your application to life with dynamic content that responds to user interactions.
+
+Consider the following example of a client component in Next.js:
+
+
+
+```jsx
+"use client";
+
+import React, { useState } from "react";
+
+const TestButton = () => {
+  const [count, setCount] = useState(0);
+
+  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
+};
+
+export default TestButton;
+
+```
+
+
+
+In this example, the `TestButton` component is explicitly marked with `"use client";` to indicate that it is a client component. It utilizes `useState` from React to manage the state of a counter. Each time the button is clicked, the counter's state is updated, and the component re-renders to display the new count. This component relies on the browser's JavaScript engine to handle user interaction and state management, characteristics of client-side operations.
+
+#### What Are Server Components?
+
+
+
+Server components, on the other hand, run on the server and are rendered to HTML before being sent to the client. These components are ideal for parts of your application that do not require direct interaction with users, such as static content generation. Server components can fetch data and pass it down to client components as props, optimizing performance and reducing the amount of JavaScript shipped to the browser.
+
+One of the key benefits of server components is their ability to reduce the overall JavaScript bundle size of your application. Since they are rendered on the server, there's no need to send the component's code or its dependencies to the client. This leads to faster load times and a smoother user experience, especially on mobile devices or in areas with slow internet connections.
+
+#### Blending Client and Server Components for Optimal Performance
+
+Next.js allows developers to seamlessly integrate client and server components within the same application. This hybrid approach enables you to leverage the strengths of both types of components—using server components for fast initial load times and SEO benefits, and client components for interactive user interfaces.
+
+Here are a few strategies for effectively combining client and server components in your Next.js projects:
+
+1. **Static Generation with Server Components**: Use server components for generating static pages and parts of your application that do not change often. This will ensure that these pages are quickly served to users.
+2. **Dynamic Interactivity with Client Components**: Implement client components for dynamic sections of your app that require user interaction, such as forms, buttons, and modals.
+3. **Data Fetching and Hydration**: Fetch data in server components and pass it down to client components as props. This allows you to minimize the amount of data fetching on the client side, speeding up interactivity.
+4. **Conditional Rendering**: Use conditional rendering to decide whether a component should be rendered on the server or the client based on the application's current state or user actions.
+
+### Conclusion
+
+Before proceeding with your development and learning journey with Next.js it's important to fully understand these differences.  Here's a quick reference table to clarify what each type of component can do and what it can't:
+
+| Capability                             | Client Components | Server Components |
+| -------------------------------------- | ----------------- | ----------------- |
+| Access browser APIs                    | Yes               | No                |
+| Interact with the DOM                  | Yes               | No                |
+| Use React state and effects            | Yes               | No                |
+| Handle user inputs and events          | Yes               | No                |
+| Optimized for SEO                      | No                | Yes               |
+| Reduce initial page load time          | No                | Yes               |
+| Directly include dynamic data fetching | Limited           | Yes               |
+
+Client components can fetch data dynamically, but for optimal performance and SEO, server components or Next.js data fetching methods like `getServerSideProps` or `getStaticProps` are recommended.
+
+Hopefully, now you can make a clear decision on when to use which component, and how to use it.
