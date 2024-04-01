@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'Checkout my recently published articles',
   language: 'en-us',
   theme: 'dark', // system, dark or light
-  siteUrl: 'https://tailwind-css-starter-blog-murex-sigma.vercel.app/',
+  siteUrl: 'https://blog.codewithsloba.com/',
   siteRepo: 'https://github.com/bobangajicsm/tailwind-css-starter-blog',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
