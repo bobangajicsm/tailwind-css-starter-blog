@@ -1,0 +1,122 @@
+---
+title: 'Understanding Nested Layouts in Next.js'
+date: '2024-04-11'
+lastmod: '2024-04-11'
+tags: ['next.js']
+draft: false
+summary: "A layout is a design pattern that is used to consistently arrange components across an application. One interesting concept in layouts is 'nested layouts,' which can help us to build complex UI architectures that are both scalable and maintainable."
+images: ['/static/images/nextjs/layouts-in-nextjs.png']  
+authors: ['default']
+layout: PostLayout
+canonicalUrl: https://blog.codewithsloba.com/blog/nextjs/nested-layouts
+---
+
+A layout is a design pattern that is used to consistently arrange components across an application. One interesting concept in layouts is "nested layouts," which can help us to build complex UI architectures that are both scalable and maintainable. In this article, let's see how nested layouts work in Next.js and how to use them in your projects.
+
+
+***
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8e7VExUpf-Q?si=gBD8PkbK_iRm_8Hx" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+
+***
+
+##
+
+:::tip
+## Table of Contents
+
+* [Introduction](#introduction)
+* [What are Nested Layouts?](#what-are-nested-layouts)
+* [Implementing a Simple Layout in Next.js](#implementing-a-simple-layout-in-next-js)
+* [Creating Nested Layouts](#creating-nested-layouts)
+* [Benefits of Nested Layouts](#benefits-of-nested-layouts)
+* [Conclusion](#conclusion)
+:::
+
+
+### What are Nested Layouts?
+
+Nested layouts refer to the technique of placing one layout inside another. This method is particularly useful when you want different sections of your application to have distinct appearances or functionalities, but still share some common design elements. For example, you might want a specific layout for the admin section of your website that differs from what regular users see, yet maintains a consistent header or footer across all pages.
+
+### Implementing a Simple Layout in Next.js
+
+Before diving into nested layouts, let's understand how to create a basic layout in Next.js. A layout in Next.js is typically a React component that wraps around your page content. Here’s a simple layout component that in our Bar page:
+
+```jsx
+const BarLayout = ({ children }) => {
+  return (
+    <div>
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/60146ec5ca0b337ce6a69312/131df8be-46ff-426f-9d93-723afe05a95a/dtp_roxy2019_186.jpg"
+            className="max-w-full lg:max-w-sm rounded-lg shadow-2xl"
+          />
+          <div>
+            <h1 className="text-5xl font-bold">Welcome to our Bar</h1>
+            <p className="py-6">
+              Feel free to order as many drinks as you like.
+            </p>
+            <button className="btn btn-primary">Let's get some</button>
+          </div>
+        </div>
+      </div>
+
+      {children}
+    </div>
+  );
+};
+
+```
+
+In this example, `BarLayout` is a functional component that takes `children` as a prop. This `children` prop will be the content you want to render within the layout. The layout itself includes a hero section with an image, a headline, some text, and a button. Any content passed into `BarLayout` will be rendered below this hero section.
+
+### Creating Nested Layouts
+
+Nested layouts extend this concept by including one layout inside another. Let’s say you have a general layout that includes a navbar and footer, and you want to include the `BarLayout` inside this for specific pages. Here’s how you might structure this:
+
+
+```jsx
+const GeneralLayout = ({ children }) => {
+  return (
+    <div>
+      <Navbar />
+      {children}  // This could be BarLayout or any other specific layout
+      <Footer />
+    </div>
+  );
+};
+
+```
+
+Then, when defining the pages that should use both the `GeneralLayout` and the `BarLayout`, you can nest them like this:
+
+
+
+```jsx
+const SomePage = () => {
+  return (
+    <GeneralLayout>
+      <BarLayout>
+        <p>This is the content specific to Some Page which uses BarLayout.</p>
+      </BarLayout>
+    </GeneralLayout>
+  );
+};
+
+```
+
+
+In this configuration, `SomePage` first uses `GeneralLayout`, which includes the navbar and footer. Within `GeneralLayout`, it uses `BarLayout` for a specific section of the page, which in turn includes the content `<p>This is the content specific to Some Page which uses BarLayout.</p>`.
+
+### Benefits of Nested Layouts
+
+Nested layouts offer several benefits:
+
+1. **Reusability**: Layouts can be reused across different parts of an application, reducing code duplication.
+2. **Consistency**: Helps maintain visual and functional consistency throughout the application.
+3. **Separation of Concerns**: Each layout can manage its own design and behavior, making the codebase easier to maintain and scale.
+
+### Conclusion
+
+Nested layouts in Next.js provide a powerful way to organize the components of your application. Experiment with different layout configurations to find what works best for your specific use case.
