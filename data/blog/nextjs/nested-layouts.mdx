@@ -71,6 +71,8 @@ const Layout = ({ children }) => {
 
 In this example, `Layout` is a functional component that takes `children` as a prop. This `children` prop will be the content you want to render within the layout. The layout itself includes a hero section with an image, a headline, some text, and a button. Any content passed into `Layout` will be rendered below this hero section.
 
+Also what is important to know is that the file name needs to be `layout(.js, .jsx, .tsx)` and it renders the content of `page(.js, .jsx, .tsx)` from the same folder as children. 
+
 ### Creating Nested Layouts
 
 Nested layouts extend this concept by including one layout inside another. Let’s say you have a general layout that includes a navbar and footer, and you want to include the `BarLayout` inside this for specific pages. Here’s how you might structure this:
@@ -89,25 +91,9 @@ const GeneralLayout = ({ children }) => {
 
 ```
 
-Then, when defining the pages that should use both the `GeneralLayout` and the `BarLayout`, you can nest them like this:
+Then, inside of the `Bar` component folder you want to create another `layout.js` file, which will serve as a nested layout just for `Bar` component.
+In this configuration, `SomePage` first uses `GeneralLayout`, which includes the `navbar` and `footer`. Within `GeneralLayout`, it uses `BarLayout` for a specific section of the page, which in turn includes the content `<p>This is the content specific to Some Page which uses BarLayout.</p>`.
 
-
-
-```jsx
-const SomePage = () => {
-  return (
-    <GeneralLayout>
-      <BarLayout>
-        <p>This is the content specific to Some Page which uses BarLayout.</p>
-      </BarLayout>
-    </GeneralLayout>
-  );
-};
-
-```
-
-
-In this configuration, `SomePage` first uses `GeneralLayout`, which includes the navbar and footer. Within `GeneralLayout`, it uses `BarLayout` for a specific section of the page, which in turn includes the content `<p>This is the content specific to Some Page which uses BarLayout.</p>`.
 
 ### Benefits of Nested Layouts
 
