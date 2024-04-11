@@ -40,10 +40,10 @@ Nested layouts refer to the technique of placing one layout inside another. This
 
 ### Implementing a Simple Layout in Next.js
 
-Before diving into nested layouts, let's understand how to create a basic layout in Next.js. A layout in Next.js is typically a React component that wraps around your page content. Here’s a simple layout component that in our Bar page:
+Before diving into nested layouts, let's understand how to create a basic layout in Next.js. A layout in Next.js is typically a React component that wraps around your page content. Here’s a simple layout component that sits in our Bar app:
 
 ```jsx
-const BarLayout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -69,7 +69,7 @@ const BarLayout = ({ children }) => {
 
 ```
 
-In this example, `BarLayout` is a functional component that takes `children` as a prop. This `children` prop will be the content you want to render within the layout. The layout itself includes a hero section with an image, a headline, some text, and a button. Any content passed into `BarLayout` will be rendered below this hero section.
+In this example, `Layout` is a functional component that takes `children` as a prop. This `children` prop will be the content you want to render within the layout. The layout itself includes a hero section with an image, a headline, some text, and a button. Any content passed into `Layout` will be rendered below this hero section.
 
 ### Creating Nested Layouts
 
